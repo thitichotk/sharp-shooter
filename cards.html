@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sharp-Shooter · Print the cards</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700;800&family=Saira:wght@400&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page { width: min(820px, 100% - 32px); margin: 0 auto; padding: 28px 0 48px; display: grid; gap: 20px; }
+    .page .logo { height: 40px; width: auto; }
+    .page h1 { margin: 0; font: 800 44px/0.95 var(--font-display); text-transform: uppercase; }
+    .page p { margin: 0; color: var(--fg-2); font-size: var(--text-sm); max-width: 60ch; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .sheet { display: flex; flex-wrap: wrap; gap: 6mm; padding: 10mm; background: #fff; }
+    .card { margin: 0; border: 0.3mm dashed #8a8f96; }
+    .card img { display: block; height: auto; }
+    .agent img { width: 63mm; }   /* poker-card width */
+    .weapon img { width: 88mm; }  /* weapon cards lie on their side */
+    @page { size: A4; margin: 10mm; }
+    @media print {
+      body { background: #fff; }
+      .no-print { display: none !important; }
+      .page { width: auto; padding: 0; }
+      .sheet { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="no-print">
+      <img class="logo" src="assets/logo-inverse.svg" alt="Sharp-Shooter">
+    </div>
+    <h1 class="no-print">Print the cards</h1>
+    <p class="no-print">Print on A4 at 100% scale (turn off "fit to page"), then cut along the dashed lines. Agent cards come out 63 mm wide and weapon cards 88 mm. Matte paper tracks best; glossy paper reflects light into the camera.</p>
+    <div class="actions no-print">
+      <button class="btn btn-primary" id="print" type="button">Print</button>
+      <a class="btn btn-secondary" href="./">Back to the game</a>
+    </div>
+    <section class="sheet" aria-label="Card sheet">
+      <figure class="card agent"><img src="plane/AgentA.png" alt="Agent A card"></figure>
+      <figure class="card agent"><img src="plane/AgentB.png" alt="Agent B card"></figure>
+      <figure class="card weapon"><img src="plane/ak_47.png" alt="AK-47 card"></figure>
+      <figure class="card weapon"><img src="plane/famas_f1.png" alt="FAMAS F1 card"></figure>
+      <figure class="card weapon"><img src="plane/pp_19_bizon.png" alt="PP-19 Bizon card"></figure>
+      <figure class="card weapon"><img src="plane/m14.png" alt="M14 card"></figure>
+      <figure class="card weapon"><img src="plane/sks_type_56.png" alt="SKS Type 56 card"></figure>
+      <figure class="card weapon"><img src="plane/vz61_skorpion.png" alt="Vz. 61 Skorpion card"></figure>
+    </section>
+  </main>
+  <script>document.getElementById("print").addEventListener("click", () => window.print());</script>
+</body>
+</html>
