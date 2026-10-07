@@ -1,278 +1,145 @@
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Shooting Card Game</title>
-    
-    <!-- Load external libraries -->
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sharp-Shooter · a WebAR card shooter</title>
+  <meta name="description" content="A turn-based shooter played with printed cards and a phone camera. Two agents, six weapons, 200 HP each.">
+  <meta property="og:title" content="Sharp-Shooter">
+  <meta property="og:description" content="A turn-based WebAR shooter played with printed cards.">
+  <meta name="theme-color" content="#0B0D10">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Saira:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
 
-    <!-- Load custom styles and scripts -->
-    <link rel="stylesheet" href="styles.css">
-    <script src="game.js"></script>
-  </head>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"
+          integrity="sha384-tVEbl7TUEnd3P8HoHIOqysRs2s8XW0iEfseiRgKkR9qRUtITLdOX+llejEgkop5S" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"
+          integrity="sha384-kcf/qSrCvp+E61nlypb+jERqjCMK7gpiAp/DLO+HRdq1hcccAtLHyUmK6l8bFMal" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"
+          integrity="sha384-ZHzhpi2n42toODKMmUUGXg0pvHyiy93QNJAFOolPusGM3zoKneuUcjAgWZp6SzsY" crossorigin="anonymous"></script>
+  <script type="module" src="game.js"></script>
+</head>
+<body>
+  <a-scene
+    mindar-image="imageTargetSrc: mind/targets.mind; maxTrack: 4; autoStart: false; uiLoading: no; uiScanning: no; uiError: no"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    loading-screen="enabled: false"
+  >
+    <a-assets timeout="120000">
+      <a-asset-item id="fbi" src="model/fbi_cs2_agent.glb"></a-asset-item>
+      <a-asset-item id="balkan" src="model/balkan_cs2_agent.glb"></a-asset-item>
+      <a-asset-item id="explosion" src="model/timeframe_explosion.glb"></a-asset-item>
+      <a-asset-item id="ak_47" src="model/ak_47.glb"></a-asset-item>
+      <a-asset-item id="famas_f1" src="model/famas_f1.glb"></a-asset-item>
+      <a-asset-item id="pp_19_bizon" src="model/pp_19_bizon.glb"></a-asset-item>
+      <a-asset-item id="m14" src="model/m14.glb"></a-asset-item>
+      <a-asset-item id="sks_type_56" src="model/sks_type_56.glb"></a-asset-item>
+      <a-asset-item id="vz61_skorpion" src="model/vz61_skorpion.glb"></a-asset-item>
+      <img id="art-A" src="plane/AgentA.png" alt="">
+      <img id="art-B" src="plane/AgentB.png" alt="">
+      <img id="art-ak_47" src="plane/ak_47.png" alt="">
+      <img id="art-famas_f1" src="plane/famas_f1.png" alt="">
+      <img id="art-pp_19_bizon" src="plane/pp_19_bizon.png" alt="">
+      <img id="art-m14" src="plane/m14.png" alt="">
+      <img id="art-sks_type_56" src="plane/sks_type_56.png" alt="">
+      <img id="art-vz61_skorpion" src="plane/vz61_skorpion.png" alt="">
+    </a-assets>
 
-  <body>
-    <a-scene
-      mindar-image="imageTargetSrc: mind/targets.mind; maxTrack: 8"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
-    >
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0" id="charaA" target-events>
-        <a-gltf-model
-          id="charaAModel"
-          src="model/fbi_cs2_agent.glb"
-          position="0 0.5 0"
-          scale="0.5 0.5 0.5"
-          rotation="90 0 0"
-          animation-mixer="clip: eye_test"
-        >
-          <a-plane
-            src="plane/AgentA.png"
-            position="0 0 1"
-            height="2.7"
-            width="2"
-            rotation="-90 0 0"
-            opacity="0.8"
-          ></a-plane>
-          <a-gltf-model
-            id="ak47Model"
-            src="model/ak_47.glb"
-            position="-0.1 1.45 0.4"
-            scale="0.4 0.4 0.4"
-            rotation="0 180 0"
-          ></a-gltf-model>
-          <a-gltf-model
-            id="famasF1Model"
-            src="model/famas_f1.glb"
-            position="-0.1 1.35 0.4"
-            scale="0.4 0.4 0.4"
-            rotation="0 180 0"
-          ></a-gltf-model>
-          <a-gltf-model
-            id="pp19BizonModel"
-            src="model/pp_19_bizon.glb"
-            position="-0.15 1.35 0.4"
-            scale="0.5 0.5 0.5"
-            rotation="0 180 0"
-          ></a-gltf-model>
+    <!-- Target order is fixed by mind/targets.mind -->
+    <a-entity id="charaA" mindar-image-target="targetIndex: 0">
+      <a-gltf-model id="model-A" src="#fbi" position="0 0.5 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer="clip: eye_test">
+        <a-plane src="#art-A" position="0 0 1" height="2.7" width="2" rotation="-90 0 0" opacity="0.8"></a-plane>
+        <a-gltf-model id="gun-ak_47" src="#ak_47" position="-0.1 1.45 0.4" scale="0.4 0.4 0.4" rotation="0 180 0" visible="false"></a-gltf-model>
+        <a-gltf-model id="gun-famas_f1" src="#famas_f1" position="-0.1 1.35 0.4" scale="0.4 0.4 0.4" rotation="0 180 0" visible="false"></a-gltf-model>
+        <a-gltf-model id="gun-pp_19_bizon" src="#pp_19_bizon" position="-0.15 1.35 0.4" scale="0.5 0.5 0.5" rotation="0 180 0" visible="false"></a-gltf-model>
+        <a-gltf-model id="shot-A" src="#explosion" position="0 1.5 1.0" scale="0.035 0.035 0.035" rotation="90 90 90" visible="false" animation-mixer="clip: Explosion"></a-gltf-model>
+      </a-gltf-model>
+      <!-- Outside the model, so hiding a dead agent doesn't hide its explosion too -->
+      <a-gltf-model id="death-A" src="#explosion" position="0 0.5 0.25" scale="0.125 0.125 0.125" rotation="90 0 0" visible="false" animation-mixer="clip: Explosion"></a-gltf-model>
+    </a-entity>
 
-          <a-gltf-model
-            id="dieEffectA"
-            src="model/timeframe_explosion.glb"
-            position="0 0.5 0"
-            scale="0.25 0.25 0.25"
-            visible="false"
-            animation-mixer="clip: Explosion"
-          ></a-gltf-model>
-          <a-gltf-model
-            id="shootEffectA"
-            src="model/timeframe_explosion.glb"
-            position="0 1.5 1.0"
-            scale="0.035 0.035 0.035"
-            rotation="90 90 90"
-            visible="false"
-            animation-mixer="clip: Explosion"
-          ></a-gltf-model>
-        </a-gltf-model>
-      </a-entity>
+    <a-entity id="charaB" mindar-image-target="targetIndex: 1">
+      <a-gltf-model id="model-B" src="#balkan" position="0 0.5 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer="clip: eye_test">
+        <a-plane src="#art-B" position="0 0 1" height="2.7" width="2" rotation="-90 0 0" opacity="0.8"></a-plane>
+        <a-gltf-model id="gun-m14" src="#m14" position="-0.1 1 0.3" scale="0.6 0.6 0.6" rotation="0 180 0" visible="false"></a-gltf-model>
+        <a-gltf-model id="gun-sks_type_56" src="#sks_type_56" position="-0.1 1.08 0.4" scale="0.4 0.4 0.4" rotation="0 180 0" visible="false"></a-gltf-model>
+        <a-gltf-model id="gun-vz61_skorpion" src="#vz61_skorpion" position="-0.1 1.15 0.15" scale="0.2 0.2 0.2" rotation="0 180 0" visible="false"></a-gltf-model>
+        <a-gltf-model id="shot-B" src="#explosion" position="0 1.30 1.0" scale="0.035 0.035 0.035" rotation="90 90 90" visible="false" animation-mixer="clip: Explosion"></a-gltf-model>
+      </a-gltf-model>
+      <a-gltf-model id="death-B" src="#explosion" position="0 0.5 0.25" scale="0.125 0.125 0.125" rotation="90 0 0" visible="false" animation-mixer="clip: Explosion"></a-gltf-model>
+    </a-entity>
 
-      <a-entity mindar-image-target="targetIndex: 1" id="charaB" target-events>
-        <a-gltf-model
-          id="charaBModel"
-          src="model/balkan_cs2_agent.glb"
-          position="0 0.5 0"
-          scale="0.5 0.5 0.5"
-          rotation="90 0 0"
-          animation-mixer="clip: tools_preview"
-        >
-          <a-plane
-            src="plane/AgentB.png"
-            position="0 0 1"
-            height="2.7"
-            width="2"
-            rotation="-90 0 0"
-            opacity="0.8"
-          ></a-plane>
-          <a-gltf-model
-            id="m14Model"
-            src="model/m14.glb"
-            position="-0.1 1 0.3"
-            scale="0.6 0.6 0.6"
-            rotation="0 180 0"
-          ></a-gltf-model>
-          <a-gltf-model
-            id="sksType56Model"
-            src="model/sks_type_56.glb"
-            position="-0.1 1.08 0.4"
-            scale="0.4 0.4 0.4"
-            rotation="0 180 0"
-          ></a-gltf-model>
-          <a-gltf-model
-            id="vz61SkorpionModel"
-            src="model/vz61_skorpion.glb"
-            position="-0.1 1.15 0.15"
-            scale="0.2 0.2 0.2"
-            rotation="0 180 0"
-          ></a-gltf-model>
+    <a-entity id="ak_47-card" mindar-image-target="targetIndex: 2"><a-plane src="#art-ak_47" height="0.65" width="1" opacity="0.8"></a-plane></a-entity>
+    <a-entity id="famas_f1-card" mindar-image-target="targetIndex: 3"><a-plane src="#art-famas_f1" height="0.65" width="1" opacity="0.8"></a-plane></a-entity>
+    <a-entity id="pp_19_bizon-card" mindar-image-target="targetIndex: 4"><a-plane src="#art-pp_19_bizon" height="0.65" width="1" opacity="0.8"></a-plane></a-entity>
+    <a-entity id="m14-card" mindar-image-target="targetIndex: 5"><a-plane src="#art-m14" height="0.65" width="1" opacity="0.8"></a-plane></a-entity>
+    <a-entity id="sks_type_56-card" mindar-image-target="targetIndex: 6"><a-plane src="#art-sks_type_56" height="0.65" width="1" opacity="0.8"></a-plane></a-entity>
+    <a-entity id="vz61_skorpion-card" mindar-image-target="targetIndex: 7"><a-plane src="#art-vz61_skorpion" height="0.65" width="1" opacity="0.8"></a-plane></a-entity>
+  </a-scene>
 
-          <a-gltf-model
-            id="dieEffectB"
-            src="model/timeframe_explosion.glb"
-            position="0 0.5 0"
-            scale="0.25 0.25 0.25"
-            visible="false"
-            animation-mixer="clip: Explosion"
-          ></a-gltf-model>
-          <a-gltf-model
-            id="shootEffectB"
-            src="model/timeframe_explosion.glb"
-            position="0 1.30 1.0"
-            scale="0.035 0.035 0.035"
-            rotation="90 90 90"
-            visible="false"
-            animation-mixer="clip: Explosion"
-          ></a-gltf-model>
-        </a-gltf-model>
-      </a-entity>
+  <!-- In play: the broadcast graphics over the camera -->
+  <div class="hud" id="hud" hidden>
+    <div class="scorebug compact" id="scorebug">
+      <div class="side" style="--c:var(--ct)"><span class="tab"><small>CT</small>A</span><span class="name">Agent A</span><span class="hp" id="hp-A">200</span></div>
+      <div class="mid">Turn<b id="turn">A</b></div>
+      <div class="side b" style="--c:var(--t)"><span class="tab"><small>T</small>B</span><span class="name">Agent B</span><span class="hp" id="hp-B">200</span></div>
+    </div>
+    <div class="feed" id="feed" aria-live="polite"></div>
+    <div class="locks" id="locks"></div>
+    <div class="bottom">
+      <div class="lower" id="lower"><div><b id="lower-title">Agent A to fire</b><span id="lower-text">Show both agent cards to the camera.</span></div></div>
+      <div class="ctrl"><button type="button" id="restart" aria-label="Restart the match">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      </button></div>
+    </div>
+  </div>
 
-      <a-entity mindar-image-target="targetIndex: 2" id="ak_47" target-events>
-        <a-plane
-          src="plane/ak_47.png"
-          position="0 0 0"
-          height="0.65"
-          width="1"
-          rotation="0 0 0"
-          opacity="0.8"
-        ></a-plane>
-      </a-entity>
+  <section class="screen" id="start">
+    <img class="logo" src="assets/logo-inverse.svg" alt="Sharp-Shooter">
+    <div class="match">
+      <div class="team" style="--c:var(--ct)"><small>CT</small><b>Agent A</b><span>FBI · AK-47, FAMAS, PP-19</span></div>
+      <div class="vs">VS</div>
+      <div class="team b" style="--c:var(--t)"><small>T</small><b>Agent B</b><span>Balkan · M14, SKS, Skorpion</span></div>
+    </div>
+    <ul class="steps">
+      <li><b>Print the cards</b>Two agents and six weapons, on one A4 sheet.</li>
+      <li><b>Point the camera</b>It looks for the cards. Nothing is recorded or uploaded.</li>
+      <li><b>Take turns</b>Lay one of your weapons beside your agent to fire. Lift it before your next turn.</li>
+    </ul>
+    <table class="odds"><tbody>
+      <tr><td>Hit<small>Full damage</small></td><td>65%</td></tr>
+      <tr><td class="crit-row">Critical<small>Damage × 1.5</small></td><td>20%</td></tr>
+      <tr><td class="miss-row">Malfunction<small>No damage, turn lost</small></td><td>15%</td></tr>
+    </tbody></table>
+    <div class="cta">
+      <button class="btn btn-primary btn-wide" id="start-match" type="button" disabled>Loading models</button>
+      <a class="btn btn-secondary btn-wide" href="cards.html">Print cards</a>
+      <p class="note">Two players, one phone. Each agent has 200 HP.</p>
+    </div>
+  </section>
 
-      <a-entity
-        mindar-image-target="targetIndex: 3"
-        id="famas_f1"
-        target-events
-      >
-        <a-plane
-          src="plane/famas_f1.png"
-          position="0 0 0"
-          height="0.65"
-          width="1"
-          rotation="0 0 0"
-          opacity="0.8"
-        ></a-plane>
-      </a-entity>
+  <section class="screen" id="camera-error" hidden>
+    <img class="logo" src="assets/logo-inverse.svg" alt="Sharp-Shooter">
+    <h2>Camera unavailable</h2>
+    <p>Sharp-Shooter needs the camera to find the cards. Allow camera access for this site in your browser settings, close other apps that use the camera, then try again.</p>
+    <div class="cta"><button class="btn btn-primary btn-wide" id="retry" type="button">Try again</button></div>
+  </section>
 
-      <a-entity
-        mindar-image-target="targetIndex: 4"
-        id="pp_19_bizon"
-        target-events
-      >
-        <a-plane
-          src="plane/pp_19_bizon.png"
-          position="0 0 0"
-          height="0.65"
-          width="1"
-          rotation="0 0 0"
-          opacity="0.8"
-        ></a-plane>
-      </a-entity>
-
-      <a-entity mindar-image-target="targetIndex: 5" id="m14" target-events>
-        <a-plane
-          src="plane/m14.png"
-          position="0 0 0"
-          height="0.65"
-          width="1"
-          rotation="0 0 0"
-          opacity="0.8"
-        ></a-plane>
-      </a-entity>
-
-      <a-entity
-        mindar-image-target="targetIndex: 6"
-        id="sks_type_56"
-        target-events
-      >
-        <a-plane
-          src="plane/sks_type_56.png"
-          position="0 0 0"
-          height="0.65"
-          width="1"
-          rotation="0 0 0"
-          opacity="0.8"
-        ></a-plane>
-      </a-entity>
-
-      <a-entity
-        mindar-image-target="targetIndex: 7"
-        id="vz61_skorpion"
-        target-events
-      >
-        <a-plane
-          src="plane/vz61_skorpion.png"
-          position="0 0 0"
-          height="0.65"
-          width="1"
-          rotation="0 0 0"
-          opacity="0.8"
-        ></a-plane>
-      </a-entity>
-
-      <div id="hp-display-A" class="hp-gui hp-agentA">
-        Agent A HP: 200
-        <div
-          class="health-bar"
-          id="health-bar-A"
-          data-total="200"
-          data-value="200"
-        >
-          <div class="bar"></div>
-          <div class="hit"></div>
-        </div>
-      </div>
-
-      <div id="hp-display-B" class="hp-gui hp-agentB">
-        Agent B HP: 200
-        <div
-          class="health-bar"
-          id="health-bar-B"
-          data-total="200"
-          data-value="200"
-        >
-          <div class="bar"></div>
-          <div class="hit"></div>
-        </div>
-      </div>
-
-      <div
-        id="status-display"
-        style="
-          position: absolute;
-          bottom: 10px;
-          color: white;
-          text-align: center;
-          font-size: 2em;
-          left: 50%;
-          padding: 10px;
-          transform: translate(-50%, -50%);
-        "
-      ></div>
-
-      <!-- Game Over Display -->
-      <div
-        id="game-over"
-        class="game-over"
-        style="font-family: 'Press Start 2P'"
-      >
-        GAME OVER <br />
-        <span id="winner"></span>
-      </div>
-
-      <a-entity draw-line></a-entity>
-    </a-scene>
-  </body>
+  <section class="screen over" id="over" hidden>
+    <div class="result" id="result">
+      <b id="winner-text">Agent A wins</b>
+      <span id="final-score">172 HP left</span>
+    </div>
+    <div class="cta">
+      <button class="btn btn-primary btn-wide" id="rematch" type="button">Rematch</button>
+      <a class="btn btn-secondary btn-wide" href="cards.html">Print cards</a>
+    </div>
+  </section>
+</body>
 </html>
