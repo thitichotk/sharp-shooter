@@ -1,7 +1,7 @@
 <h1>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/logo-inverse.svg">
-    <img alt="Sharp-Shooter" src="assets/logo.svg" height="48">
+    <img alt="Sharp-Shooter" src="assets/logo.svg" height="56">
   </picture>
 </h1>
 
