@@ -38,8 +38,9 @@ python3 -m http.server 8000      # open http://localhost:8000 (a laptop webcam w
 node --test                      # the game rules
 ```
 
-To try it on a phone before pushing, put the local server behind an HTTPS tunnel (for example
-`cloudflared tunnel --url http://localhost:8000`); GitHub Pages serves `main` as it is.
+Cloudflare Pages deploys `main` as it is, and each pull request gets its own HTTPS preview link, which is the easiest
+way to try a change on a phone. For a quick local check on a phone, put the server behind an HTTPS tunnel (for example
+`cloudflared tunnel --url http://localhost:8000`).
 
 | File | Role |
 |---|---|
