@@ -38,7 +38,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 400 var(--text-base)/1.5 var(--font-sans); -webkit-font-smoothing: antialiased; }
-h2, p, ul { margin: 0; }
+h1, h2, p, ul { margin: 0; }
 [hidden] { display: none !important; }
 .a-enter-vr, .a-enter-ar { display: none !important; } /* A-Frame shows these even with vr-mode-ui off */
 
@@ -57,6 +57,7 @@ h2, p, ul { margin: 0; }
 .screen { position: fixed; inset: 0; z-index: 20; overflow: auto; display: flex; flex-direction: column; gap: 22px; padding: max(28px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)); background: var(--surface); }
 .screen > * { width: 100%; max-width: 480px; margin-left: auto; margin-right: auto; }
 .screen .logo { height: 40px; width: auto; align-self: flex-start; margin-left: max(0px, calc((100% - 480px) / 2)); }
+.screen .logo img { display: block; height: 40px; }   /* the start screen's logo is its h1 */
 .screen h2 { font: 800 var(--text-2xl)/1 var(--font-display); text-transform: uppercase; }
 .screen p { color: var(--fg-2); font-size: var(--text-sm); }
 .steps { list-style: none; padding: 0; display: grid; gap: 10px; font-size: var(--text-sm); color: var(--fg-2); }

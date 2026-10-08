@@ -1,0 +1,23 @@
+# Sharp-Shooter
+
+> Sharp-Shooter is a turn-based shooter for two players on one phone, played with printed cards and the phone
+> camera (WebAR). It runs in the browser over HTTPS; the camera only looks for the cards, and nothing is recorded or
+> uploaded.
+
+Two agents face each other on the table: Agent A (CT, FBI) with the AK-47, FAMAS F1 and PP-19 Bizon, and Agent B
+(T, Balkan) with the M14, SKS Type 56 and Vz. 61 Skorpion. Each agent has 200 HP. On your turn, lay one of your
+weapon cards beside your agent to fire. Every shot is a hit (65%), a critical for 1.5× damage (20%), or a
+malfunction that does nothing and still uses the turn (15%). The first agent to reach 0 HP loses.
+
+## Playing
+
+1. Print the card sheet on A4 at 100% scale and cut along the dashed lines.
+2. Open the game on a phone, press Start match and allow the camera.
+3. Show both agent cards, then take turns laying a weapon card beside your agent. Lift it before your next turn.
+
+## Links
+
+- [Sharp-Shooter](https://sharpshooter.thitichotk.com/): the game (needs a phone camera)
+- [Card sheet](https://sharpshooter.thitichotk.com/cards): the printable cards
+- [Source on GitHub](https://github.com/thitichotk/sharp-shooter): code under the MIT licence; the 3D models keep their own licences
+- [README](https://github.com/thitichotk/sharp-shooter/blob/main/README.md): rules, damage table, tips and credits
