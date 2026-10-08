@@ -7,6 +7,11 @@
   <meta name="description" content="A turn-based shooter played with printed cards and a phone camera. Two agents, six weapons, 200 HP each.">
   <meta property="og:title" content="Sharp-Shooter">
   <meta property="og:description" content="A turn-based WebAR shooter played with printed cards.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sharpshooter.thitichotk.com/">
+  <meta property="og:image" content="https://sharpshooter.thitichotk.com/assets/screenshot.jpg">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://sharpshooter.thitichotk.com/">
   <meta name="theme-color" content="#0B0D10">
   <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,6 +89,7 @@
   </a-scene>
 
   <!-- In play: the broadcast graphics over the camera -->
+  <main>
   <div class="hud" id="hud" hidden>
     <div class="scorebug compact" id="scorebug">
       <div class="side" style="--c:var(--ct)"><span class="tab"><small>CT</small>A</span><span class="name">Agent A</span><span class="hp" id="hp-A">200</span></div>
@@ -101,7 +107,7 @@
   </div>
 
   <section class="screen" id="start">
-    <img class="logo" src="assets/logo-inverse.svg" alt="Sharp-Shooter">
+    <h1 class="logo"><img src="assets/logo-inverse.svg" alt="Sharp-Shooter"></h1>
     <div class="match">
       <div class="team" style="--c:var(--ct)"><small>CT</small><b>Agent A</b><span>FBI · AK-47, FAMAS, PP-19</span></div>
       <div class="vs">VS</div>
@@ -141,5 +147,6 @@
       <a class="btn btn-secondary btn-wide" href="cards.html">Print cards</a>
     </div>
   </section>
+  </main>
 </body>
 </html>
